@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -41,9 +42,13 @@ public class main {
         openNewWindow("hello-view.fxml","Game",actionEvent,800,800);
     }
 
-    public void Score(ActionEvent actionEvent) {
-    }
+
 
     public void Help(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("Help");
+        alert.setHeaderText(null);
+        alert.setContentText(" gmail : asadpour808@gmail.com");
+        alert.showAndWait();
     }
 }
