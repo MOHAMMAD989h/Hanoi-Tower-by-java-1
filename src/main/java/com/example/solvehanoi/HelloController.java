@@ -109,7 +109,7 @@ public class HelloController {
     public void solveGame() {
         try {
             int n = Integer.parseInt(inputId.getText());
-            if ((n > 12) || (n < 1)) {
+            if ((n > 16) || (n < 1)) {
                 System.out.println("Please enter a valid number of disks.");
                 inforLabel.setText("must at least 12");
                 // ایجاد تایمر برای حذف متن بعد از چند ثانیه
