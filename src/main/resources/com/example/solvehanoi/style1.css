@@ -1,0 +1,37 @@
+.btn1{
+    -fx-background-color: linear-gradient(to bottom right ,#5a54a9 ,#0a85b9 );
+    -fx-background-radius: 5px;
+    -fx-cursor: hand;
+    -fx-text-fill: #fff;
+}
+.Peg{
+    -fx-background-radius: 5px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 30px;
+}
+.text-field1{
+    -fx-background-color: transparent;
+    -fx-border-color: linear-gradient(to bottom right , #4c507b, #d3005f );
+    -fx-background-radius: 5px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 30px;
+}
+.back{
+    -fx-background-color: linear-gradient(to bottom right , #dab80b, yellow );
+    -fx-background-radius: 5px;
+    -fx-border-width: 2px;
+    -fx-border-radius: 30px;
+}
+.back1{
+    -fx-background-color: linear-gradient(to bottom right , #dab80b, yellow );
+}
+.blackForm{
+    -fx-background-color: #141212;
+}
+
+.back2{
+    -fx-background-color: linear-gradient(to bottom right ,white, yellow );
+}
+.white{
+    -fx-background-color: #fff;
+}
