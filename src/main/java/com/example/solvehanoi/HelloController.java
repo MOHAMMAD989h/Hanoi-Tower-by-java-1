@@ -93,6 +93,7 @@ public class HelloController {
         pegs[2].clear();
 
         disableDragAndDrop();
+        addDisksToPeg(1);
         stopTimer();
     }
 
