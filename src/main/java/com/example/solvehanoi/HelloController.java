@@ -33,6 +33,9 @@ public class HelloController {
     @FXML
     private Label timeLbl;
 
+    @FXML
+    private Label moveLbl;
+
     private int counter = 0;
 
     private NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH); // نمایش اعداد به انگلیسی
@@ -73,6 +76,12 @@ public class HelloController {
         timeline.play(); // شروع تایمر
     }
 
+    public void showMoves(){
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
+            moveLbl.setText(String.valueOf(game.moves));
+        }));
+    }
+
     private void stopTimer() {
         if (timeline != null) {
             timeline.stop();
@@ -93,7 +102,6 @@ public class HelloController {
         pegs[2].clear();
 
         disableDragAndDrop();
-        addDisksToPeg(1);
         stopTimer();
     }
 
@@ -132,6 +140,7 @@ public class HelloController {
             game.solve(n, 0, 2, 1, moveQueue);
             executeMoves();
             startTimer();
+            showMoves();
         } catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a number.");
         }
@@ -206,6 +215,7 @@ public class HelloController {
             startTimer();
             addDisksToPeg(n);
             enableDragAndDrop();
+            showMoves();
         }
         catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a number.");
