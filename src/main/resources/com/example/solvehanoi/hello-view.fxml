@@ -57,8 +57,8 @@
          </HBox>
          <AnchorPane prefHeight="17.0" prefWidth="771.0">
             <children>
-               <Label fx:id="timeLbl" layoutX="593.0" layoutY="4.0" prefHeight="21.0" prefWidth="144.0" />
-               <Label fx:id="moveLbl" layoutX="471.0" layoutY="7.0" prefHeight="21.0" prefWidth="144.0" />
+               <Label fx:id="timeLbl" alignment="CENTER" layoutX="593.0" layoutY="4.0" prefHeight="21.0" prefWidth="144.0" />
+               <Label fx:id="moveLbl" alignment="CENTER" layoutX="430.0" layoutY="2.0" prefHeight="21.0" prefWidth="144.0" />
             </children>
          </AnchorPane>
       </AnchorPane>

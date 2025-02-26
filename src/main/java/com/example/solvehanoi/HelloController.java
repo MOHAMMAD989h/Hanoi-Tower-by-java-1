@@ -70,16 +70,15 @@ public class HelloController {
             int minutes = counter / 60; // محاسبه دقیقه
             int seconds = counter % 60; // محاسبه ثانیه
             timeLbl.setText(String.format("time : %s:%s",numberFormat.format(minutes), numberFormat.format(seconds)));
+            timeLbl.setStyle("    -fx-background-color: transparent;\n" +
+                    "    -fx-border-color: linear-gradient(to bottom right , #4c507b, #d3005f );\n" +
+                    "    -fx-background-radius: 5px;\n" +
+                    "    -fx-border-width: 2px;\n" +
+                    "    -fx-border-radius: 30px;");
         }));
 
         timeline.setCycleCount(Timeline.INDEFINITE); // اجرای نامحدود تایمر
         timeline.play(); // شروع تایمر
-    }
-
-    public void showMoves(){
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
-            moveLbl.setText(String.valueOf(game.moves));
-        }));
     }
 
     private void stopTimer() {
@@ -100,9 +99,13 @@ public class HelloController {
         pegs[0].clear();
         pegs[1].clear();
         pegs[2].clear();
-
         disableDragAndDrop();
         stopTimer();
+        moveQueue.clear();
+        moves = 0;
+        moveLbl.setText("");
+        timeLbl.setStyle("");
+        moveLbl.setStyle("");
     }
 
         private void addDisksToPeg(int numDisks) {
@@ -140,12 +143,11 @@ public class HelloController {
             game.solve(n, 0, 2, 1, moveQueue);
             executeMoves();
             startTimer();
-            showMoves();
         } catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a number.");
         }
     }
-
+    public int moves = 0;
 
 
     private void executeMoves() {
@@ -153,6 +155,13 @@ public class HelloController {
             if (!moveQueue.isEmpty()) {
                 int[] move = moveQueue.poll();
                 game.moveDisk(move[0], move[1]);
+                moves++;
+                moveLbl.setText(String.valueOf("moves : " +moves));
+                moveLbl.setStyle("    -fx-background-color: transparent;\n" +
+                        "    -fx-border-color: linear-gradient(to bottom right , #4c507b, #d3005f );\n" +
+                        "    -fx-background-radius: 5px;\n" +
+                        "    -fx-border-width: 2px;\n" +
+                        "    -fx-border-radius: 30px;");
             }
         }));
         timeline.setCycleCount(moveQueue.size());
@@ -174,7 +183,6 @@ public class HelloController {
             stopTimer();
             if(bestScore > counter){bestScore = counter;}
             counter = 0;
-            inforLabel.setText("\uD83C\uDF89 بازی تمام شد!  ");
             Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event1 -> {
                 inforLabel.setText(""); // حذف متن
             }));
@@ -215,7 +223,6 @@ public class HelloController {
             startTimer();
             addDisksToPeg(n);
             enableDragAndDrop();
-            showMoves();
         }
         catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a number.");
@@ -255,6 +262,9 @@ public class HelloController {
                 // اضافه کردن به ستون جدید
                 peg.pushDisk(draggedDisk);
                 pegBox.getChildren().add(0, draggedDisk); // قرار گرفتن در بالاترین سطح ستون جدید
+
+                moves++;
+                moveLbl.setText(String.valueOf("moves : " +moves));
 
                 event.setDropCompleted(true);
             }

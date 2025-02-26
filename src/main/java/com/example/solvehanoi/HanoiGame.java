@@ -5,7 +5,6 @@ import java.util.Queue;
 public class HanoiGame {
     private Peg[] pegs;
 
-    public int moves = 0;
 
     public HanoiGame(Peg[] pegs) {
         this.pegs = pegs;
@@ -16,8 +15,6 @@ public class HanoiGame {
     public boolean moveDisk(int from, int to) {
         Peg source = pegs[from];
         Peg destination = pegs[to];
-
-        moves++;
 
         if (source.isEmpty()) return false;
         if (!destination.isEmpty() && source.peekDisk().getSize() > destination.peekDisk().getSize())
