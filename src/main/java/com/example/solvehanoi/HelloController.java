@@ -109,9 +109,9 @@ public class HelloController {
     public void solveGame() {
         try {
             int n = Integer.parseInt(inputId.getText());
-            if ((n > 16) || (n < 1)) {
+            if ((n > 16) || (n < 3)) {
                 System.out.println("Please enter a valid number of disks.");
-                inforLabel.setText("must at least 12");
+                inforLabel.setText("must at least 3 and at most 16 disks. ");
                 // ایجاد تایمر برای حذف متن بعد از چند ثانیه
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event1 -> {
                     inforLabel.setText(""); // حذف متن
