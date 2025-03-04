@@ -1,8 +1,14 @@
 .btn1{
-    -fx-background-color: linear-gradient(to bottom right ,#5a54a9 ,#0a85b9 );
+    -fx-background-color: linear-gradient(to bottom right ,#bf2f2f ,yellow );
     -fx-background-radius: 5px;
     -fx-cursor: hand;
     -fx-text-fill: #fff;
+}
+.anchorpane{
+    -fx-background-color: linear-gradient(to bottom right ,yellow 1% ,#180046 99% );
+}
+.anchorpane1{
+    -fx-background-color: linear-gradient(to bottom left ,yellow 1% ,#180046 99% );
 }
 .Peg{
     -fx-background-radius: 5px;
@@ -23,7 +29,7 @@
     -fx-border-radius: 30px;
 }
 .back1{
-    -fx-background-color: linear-gradient(to bottom right , #dab80b, yellow );
+    -fx-background-color:#180046;
 }
 .blackForm{
     -fx-background-color: #141212;
@@ -34,4 +40,7 @@
 }
 .white{
     -fx-background-color: #fff;
+}
+.background{
+    -fx-background-color: #180046;
 }

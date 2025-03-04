@@ -9,71 +9,96 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solvehanoi.main">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1535.0" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solvehanoi.main">
     <center>
-        <AnchorPane prefHeight="200.0" prefWidth="200.0" stylesheets="@style1.css" BorderPane.alignment="CENTER">
+        <AnchorPane prefHeight="710.0" prefWidth="1321.0" styleClass="background" stylesheets="@style1.css" BorderPane.alignment="CENTER">
             <children>
-                <VBox layoutX="101.0" layoutY="59.0" prefHeight="553.0" prefWidth="499.0">
-                    <children>
-                        <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
-                            <image>
-                                <Image url="@../../../images/download%20(4).png" />
-                            </image>
-                            <VBox.margin>
-                                <Insets bottom="10.0" left="150.0" top="10.0" />
-                            </VBox.margin>
+                  <VBox fx:id="vboxFirst" layoutX="498.0" layoutY="277.0" prefHeight="266.0" prefWidth="296.0">
+                      <children>
+                          <Button mnemonicParsing="false" onAction="#StartGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="New game " textFill="#180046ed">
+                              <font>
+                                  <Font size="25.0" />
+                              </font>
+                              <VBox.margin>
+                                  <Insets bottom="10.0" top="10.0" />
+                              </VBox.margin>
+                          </Button>
+                  <Button layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#ContinueGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Continue The  Game" textFill="#180046ed">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button layoutX="10.0" layoutY="84.0" mnemonicParsing="false" onAction="#Profile" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Profile" textFill="#180046ed">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
+                          <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V 1.0 Edition" textAlignment="CENTER" wrappingWidth="251.6708984375">
+                              <VBox.margin>
+                                  <Insets bottom="100.0" top="10.0" />
+                              </VBox.margin>
+                          </Text>
+                      </children>
+                  </VBox>
+                  <Text fill="#fff600" layoutX="397.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HANOI TOWER GAME" wrappingWidth="498.49365234375">
+                      <font>
+                          <Font size="50.0" />
+                      </font>
+                  </Text>
+            <VBox fx:id="vbox2" layoutX="498.0" layoutY="277.0" prefHeight="342.0" prefWidth="296.0" visible="false">
+               <children>
+                  <Slider fx:id="numberSlider" prefHeight="41.0" prefWidth="296.0">
+                     <VBox.margin>
+                        <Insets bottom="20.0" top="40.0" />
+                     </VBox.margin></Slider>
+                  <Button mnemonicParsing="false" onAction="#OpenGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Start Game">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="15.0" right="5.0" top="20.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button layoutX="25.0" layoutY="131.0" mnemonicParsing="false" onAction="#openSolveAuto" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Solve Autumatic">
+                     <VBox.margin>
+                        <Insets left="15.0" />
+                     </VBox.margin>
+                  </Button>
+                  <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="95.0" styleClass="background" stylesheets="@style1.css">
+                     <VBox.margin>
+                        <Insets left="100.0" top="20.0" />
+                     </VBox.margin>
+                     <graphic>
+                        <ImageView fitHeight="37.0" fitWidth="42.0" onDragDetected="#backToMain" pickOnBounds="true">
+                           <image>
+                              <Image url="@../../../images/return-icon-png-21.jpg" />
+                           </image>
                         </ImageView>
-                        <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="HANOI TOWER GAME" wrappingWidth="498.49365234375">
-                            <font>
-                                <Font size="50.0" />
-                            </font>
-                            <VBox.margin>
-                                <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
-                            </VBox.margin>
-                        </Text>
-                        <VBox prefHeight="266.0" prefWidth="296.0">
-                            <children>
-                                <Button mnemonicParsing="false" onAction="#StartGame" prefHeight="40.0" prefWidth="250.0" styleClass="btn1" stylesheets="@style1.css" text="Start" textFill="#000000ed">
-                                    <font>
-                                        <Font size="25.0" />
-                                    </font>
-                                    <VBox.margin>
-                                        <Insets bottom="10.0" top="10.0" />
-                                    </VBox.margin>
-                                </Button>
-                                <Button mnemonicParsing="false" onAction="#Help" prefHeight="40.0" prefWidth="250.0" styleClass="btn1" stylesheets="@style1.css" text="Help">
-                                    <font>
-                                        <Font size="25.0" />
-                                    </font>
-                                    <VBox.margin>
-                                        <Insets bottom="10.0" top="10.0" />
-                                    </VBox.margin>
-                                </Button>
-                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V 1.0 Edition" textAlignment="CENTER" wrappingWidth="251.6708984375">
-                                    <VBox.margin>
-                                        <Insets bottom="100.0" top="10.0" />
-                                    </VBox.margin>
-                                </Text>
-                            </children>
-                            <VBox.margin>
-                                <Insets bottom="20.0" left="120.0" right="110.0" top="20.0" />
-                            </VBox.margin>
-                        </VBox>
-                    </children>
-                </VBox>
+                     </graphic>
+                  </Button>
+               </children>
+            </VBox>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="546.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+                      <image>
+                          <Image url="@../../../images/photo_2025-03-02_16-35-24s.png" />
+                      </image>
+                  </ImageView>
             </children>
         </AnchorPane>
     </center>
     <left>
-        <AnchorPane prefHeight="200.0" prefWidth="40.0" styleClass="back1" stylesheets="@style1.css" BorderPane.alignment="CENTER" />
+        <AnchorPane prefHeight="700.0" prefWidth="200.0" styleClass="back1" stylesheets="@style1.css" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane prefHeight="110.0" prefWidth="74.0" styleClass="anchorpane" stylesheets="@style1.css" />
+         </children></AnchorPane>
     </left>
-    <top>
-        <AnchorPane prefHeight="40.0" prefWidth="200.0" styleClass="back1" stylesheets="@style1.css" BorderPane.alignment="CENTER" />
-    </top>
     <right>
-        <AnchorPane prefHeight="200.0" prefWidth="40.0" styleClass="back1" stylesheets="@style1.css" BorderPane.alignment="CENTER" />
+        <AnchorPane prefHeight="700.0" prefWidth="200.0" styleClass="back1" stylesheets="@style1.css" BorderPane.alignment="CENTER">
+         <children>
+            <AnchorPane layoutX="126.0" prefHeight="110.0" prefWidth="74.0" styleClass="anchorpane1" stylesheets="@style1.css" />
+         </children></AnchorPane>
     </right>
-    <bottom>
-        <AnchorPane prefHeight="40.0" prefWidth="200.0" styleClass="back1" stylesheets="@style1.css" BorderPane.alignment="CENTER" />
-    </bottom>
 </BorderPane>

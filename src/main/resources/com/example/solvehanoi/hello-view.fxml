@@ -7,43 +7,20 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solvehanoi.HelloController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1535.0" styleClass="background" stylesheets="@style1.css" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.solvehanoi.HelloController">
    <center>
       <AnchorPane prefHeight="646.0" prefWidth="764.0" BorderPane.alignment="CENTER">
-         <HBox alignment="CENTER" layoutY="24.0" prefHeight="585.0" prefWidth="760.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.40">
+         <HBox alignment="CENTER" layoutX="384.0" layoutY="25.0" prefHeight="585.0" prefWidth="760.0" spacing="20" xmlns="http://javafx.com/javafx/8.0.40">
             <AnchorPane prefHeight="671.0" prefWidth="40.0" />
             <VBox fx:id="peg1" prefHeight="300" prefWidth="100" style="-fx-background-color: lightgray;" />
             <VBox fx:id="peg2" prefHeight="620.0" prefWidth="100" style="-fx-background-color: lightgray;" />
             <VBox fx:id="peg3" prefHeight="300" prefWidth="100" style="-fx-background-color: lightgray;" />
          </HBox>
-         <HBox layoutY="604.0" prefHeight="67.0" prefWidth="764.0">
+         <HBox layoutY="604.0" prefHeight="73.0" prefWidth="1456.0">
             <children>
-               <TextField fx:id="inputId" prefHeight="35.0" prefWidth="106.0" styleClass="text-field1" stylesheets="@style1.css">
-                  <padding>
-                     <Insets top="10.0" />
-                  </padding>
-                  <HBox.margin>
-                     <Insets left="60.0" right="20.0" top="18.0" />
-                  </HBox.margin>
-               </TextField>
-               <Button mnemonicParsing="false" onAction="#solveUser" styleClass="btn1" stylesheets="@style1.css" text="solve">
-                  <HBox.margin>
-                     <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
-                  </HBox.margin>
-               </Button>
-               <Button onAction="#solveGame" styleClass="btn1" stylesheets="@style1.css" text="Solve automatic">
-                  <HBox.margin>
-                     <Insets left="20.0" right="20.0" top="18.0" />
-                  </HBox.margin>
-               </Button>
-               <Button mnemonicParsing="false" onAction="#resetHanoi" styleClass="btn1" stylesheets="@style1.css" text="reset" textFill="#b2ba1a">
-                  <HBox.margin>
-                     <Insets left="20.0" right="20.0" top="18.0" />
-                  </HBox.margin>
-               </Button>
                <Button mnemonicParsing="false" onAction="#backToStart" styleClass="white" stylesheets="@style1.css">
                   <HBox.margin>
-                     <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
+                     <Insets bottom="18.0" left="760.0" right="20.0" top="18.0" />
                   </HBox.margin>
                   <graphic>
                      <ImageView fitHeight="27.0" fitWidth="37.0" pickOnBounds="true" preserveRatio="true">
@@ -55,10 +32,10 @@
                </Button>
             </children>
          </HBox>
-         <AnchorPane prefHeight="17.0" prefWidth="771.0">
+         <AnchorPane prefHeight="22.0" prefWidth="1452.0">
             <children>
-               <Label fx:id="timeLbl" alignment="CENTER" layoutX="593.0" layoutY="4.0" prefHeight="21.0" prefWidth="144.0" />
-               <Label fx:id="moveLbl" alignment="CENTER" layoutX="430.0" layoutY="2.0" prefHeight="21.0" prefWidth="144.0" />
+               <Label fx:id="moveLbl" alignment="CENTER" layoutX="620.0" layoutY="1.0" prefHeight="21.0" prefWidth="144.0" textFill="WHITE" />
+               <Label fx:id="timeLbl" alignment="CENTER" layoutX="881.0" layoutY="1.0" prefHeight="21.0" prefWidth="144.0" textFill="WHITE" />
             </children>
          </AnchorPane>
       </AnchorPane>
@@ -67,18 +44,7 @@
       <AnchorPane prefHeight="671.0" prefWidth="40.0" styleClass="back" stylesheets="@style1.css" BorderPane.alignment="CENTER" />
    </right>
    <bottom>
-      <AnchorPane prefHeight="60.0" prefWidth="800.0" BorderPane.alignment="CENTER">
-         <children>
-            <HBox prefHeight="60.0" prefWidth="800.0">
-               <children>
-                  <Label fx:id="inforLabel" alignment="CENTER" prefHeight="21.0" prefWidth="406.0">
-                     <HBox.margin>
-                        <Insets bottom="15.0" left="250.0" right="250.0" top="15.0" />
-                     </HBox.margin>
-                  </Label>
-               </children>
-            </HBox>
-         </children></AnchorPane>
+      <AnchorPane prefHeight="60.0" prefWidth="800.0" BorderPane.alignment="CENTER" />
    </bottom>
    <left>
       <AnchorPane prefHeight="200.0" prefWidth="40.0" styleClass="back" stylesheets="@style1.css" BorderPane.alignment="CENTER" />
@@ -86,7 +52,7 @@
    <top>
       <HBox prefHeight="60.0" prefWidth="800.0" BorderPane.alignment="CENTER">
          <children>
-            <Text fill="RED" strokeType="OUTSIDE" strokeWidth="0.0" text="HANOI">
+            <Text fill="#fff400" strokeType="OUTSIDE" strokeWidth="0.0" text="HAMOI TOWE GAME">
                <HBox.margin>
                   <Insets left="20.0" right="400.0" />
                </HBox.margin>
@@ -96,10 +62,10 @@
             </Text>
             <ImageView fitHeight="57.0" fitWidth="108.0" pickOnBounds="true" preserveRatio="true" HBox.hgrow="ALWAYS">
                <HBox.margin>
-                  <Insets left="150.0" right="20.0" />
+                  <Insets left="650.0" right="20.0" />
                </HBox.margin>
                <image>
-                  <Image url="@../../../images/download%20(4).png" />
+                  <Image url="@../../../images/photo_2025-03-02_16-35-24s.png" />
                </image>
             </ImageView>
          </children>

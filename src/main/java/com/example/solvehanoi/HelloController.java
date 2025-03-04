@@ -19,6 +19,8 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
 
+import static com.example.solvehanoi.main.NumberDisk;
+
 public class HelloController {
     @FXML
     private TextField inputId;
@@ -27,8 +29,6 @@ public class HelloController {
     @FXML private HanoiGame game;
     @FXML private Queue<int[]> moveQueue = new LinkedList<>();
     @FXML private Timeline timeline;
-    @FXML
-    private Label inforLabel;
 
     @FXML
     private Label timeLbl;
@@ -39,6 +39,7 @@ public class HelloController {
     private int counter = 0;
 
     private NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH); // نمایش اعداد به انگلیسی
+
 
 
 
@@ -56,13 +57,13 @@ public class HelloController {
         setupDropTarget(peg2, pegs[1]);
         setupDropTarget(peg3, pegs[2]);
 
-        addDisksToPeg(1); // تعداد دیسک‌ها
+        addDisksToPeg(3); // تعداد دیسک‌ها
 
-        /*Timeline timeline = new Timeline(
+        Timeline timeline = new Timeline(
                 new KeyFrame(Duration.millis(1000), event -> checkGameCompletion())
         );
         timeline.setCycleCount(Animation.INDEFINITE); // اجرای بی‌نهایت
-        timeline.play();*/
+        timeline.play();
     }
     private void startTimer() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -118,15 +119,13 @@ public class HelloController {
 
 
     @FXML
-    public void solveGame() {
+    public  void solveGame() {
         try {
-            int n = Integer.parseInt(inputId.getText());
+            int n = Integer.parseInt(String.valueOf(NumberDisk));
             if ((n > 16) || (n < 3)) {
                 System.out.println("Please enter a valid number of disks.");
-                inforLabel.setText("must at least 3 and at most 16 disks. ");
                 // ایجاد تایمر برای حذف متن بعد از چند ثانیه
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event1 -> {
-                    inforLabel.setText(""); // حذف متن
                 }));
                 timeline.setCycleCount(1); // فقط یک بار اجرا شود
                 timeline.play();
@@ -167,27 +166,20 @@ public class HelloController {
         timeline.setCycleCount(moveQueue.size());
         timeline.play();
     }
-
-    public void resetHanoi(ActionEvent actionEvent) {
-        resetGame();
-        checkGameCompletion();
-    }
-
     main cont = new main();
 
-    public void backToStart(ActionEvent actionEvent) {cont.openNewWindow("main.fxml","Home",actionEvent,800,800);}
+    public void backToStart(ActionEvent actionEvent) {
+        cont.openNewWindow("main.fxml","Hanoi",actionEvent);
+        NumberDisk = 3;
+    }
 
     public void checkGameCompletion() {
-        if (pegs[0].isEmpty() && pegs[1].isEmpty()) {
+        int n = Integer.parseInt(inputId.getText());
+        if (pegs[2].equals(n)) {
             disableDragAndDrop();
             stopTimer();
             if(bestScore > counter){bestScore = counter;}
             counter = 0;
-            Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event1 -> {
-                inforLabel.setText(""); // حذف متن
-            }));
-            timeline.setCycleCount(1); // فقط یک بار اجرا شود
-            timeline.play();
         }
     }
 
@@ -199,15 +191,13 @@ public class HelloController {
         }
     }
 
-    public void solveUser(ActionEvent actionEvent) {
+    public void solveUser() {
         try{
-            int n = Integer.parseInt(inputId.getText());
+            int n = Integer.parseInt(String.valueOf(NumberDisk));
             if ((n > 12) || (n < 1)) {
                 System.out.println("Please enter a valid number of disks.");
-                inforLabel.setText("must at least 12");
                 // ایجاد تایمر برای حذف متن بعد از چند ثانیه
                 Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event1 -> {
-                    inforLabel.setText(""); // حذف متن
                 }));
                 timeline.setCycleCount(1); // فقط یک بار اجرا شود
                 timeline.play();
