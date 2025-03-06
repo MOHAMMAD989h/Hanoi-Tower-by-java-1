@@ -18,7 +18,7 @@
          </HBox>
          <HBox layoutY="604.0" prefHeight="73.0" prefWidth="1456.0">
             <children>
-               <Button mnemonicParsing="false" onAction="#backToStart" styleClass="white" stylesheets="@style1.css">
+               <Button fx:id="backToStart" mnemonicParsing="false" onAction="#backToStart" styleClass="white" stylesheets="@style1.css">
                   <HBox.margin>
                      <Insets bottom="18.0" left="760.0" right="20.0" top="18.0" />
                   </HBox.margin>

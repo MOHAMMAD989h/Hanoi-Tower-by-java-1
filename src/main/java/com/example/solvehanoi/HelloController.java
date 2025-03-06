@@ -1,10 +1,11 @@
 package com.example.solvehanoi;
 import javafx.animation.Animation;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.ProgressBar;
 import javafx.scene.control.TextField;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
@@ -12,12 +13,15 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.text.NumberFormat;
 import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.example.solvehanoi.main.NumberDisk;
 
@@ -36,11 +40,20 @@ public class HelloController {
     @FXML
     private Label moveLbl;
 
+    @FXML
+    private Button backToStart;
+
     private int counter = 0;
 
-    private NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH); // نمایش اعداد به انگلیسی
+    private final NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH); // نمایش اعداد به انگلیسی
 
+    AtomicBoolean isReset = new AtomicBoolean(true);
 
+    AtomicInteger n1c = new AtomicInteger();
+    AtomicInteger n2c = new AtomicInteger() ;
+    AtomicInteger n3c = new AtomicInteger() ;
+
+    boolean isBestScore = false;
 
 
 
@@ -59,11 +72,28 @@ public class HelloController {
 
         addDisksToPeg(3); // تعداد دیسک‌ها
 
-        Timeline timeline = new Timeline(
-                new KeyFrame(Duration.millis(1000), event -> checkGameCompletion())
+
+        final Timeline[] timeline1 = new Timeline[1]; // آرایه‌ای برای نگه‌داشتن مقدار
+        timeline1[0] = new Timeline(
+                new KeyFrame(Duration.millis(500), event -> {
+                    if(isReset.get()) {
+                        checkGameCompletion();
+                    }
+                    /*Platform.runLater(() -> {
+                        if(main.isSolvedUser){
+                            n1c.set(peg1.getChildren().size());
+                            n2c.set(peg2.getChildren().size());
+                            n3c.set(peg3.getChildren().size());
+                            System.out.println(n1c+ " *");
+                            System.out.println(n2c + " *");
+                            System.out.println(n3c + " *");
+                        }
+                    });*/
+                })
         );
-        timeline.setCycleCount(Animation.INDEFINITE); // اجرای بی‌نهایت
-        timeline.play();
+
+        timeline1[0].setCycleCount(Animation.INDEFINITE);
+        timeline1[0].play();
     }
     private void startTimer() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), event -> {
@@ -89,7 +119,7 @@ public class HelloController {
             timeLbl.setText("");
         }
     }
-    int bestScore = Integer.MAX_VALUE;
+    public static int bestScore = Integer.MAX_VALUE;
 
     @FXML
     private void resetGame() {
@@ -109,7 +139,7 @@ public class HelloController {
         moveLbl.setStyle("");
     }
 
-        private void addDisksToPeg(int numDisks) {
+    private void addDisksToPeg(int numDisks) {
         for (int i = numDisks; i > 0; i--) {
             Disk disk = new Disk(i, Color.BLUE);
             pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
@@ -124,11 +154,6 @@ public class HelloController {
             int n = Integer.parseInt(String.valueOf(NumberDisk));
             if ((n > 16) || (n < 3)) {
                 System.out.println("Please enter a valid number of disks.");
-                // ایجاد تایمر برای حذف متن بعد از چند ثانیه
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event1 -> {
-                }));
-                timeline.setCycleCount(1); // فقط یک بار اجرا شود
-                timeline.play();
 
                 return;
             }
@@ -136,6 +161,7 @@ public class HelloController {
                 Disk disk = new Disk(i, Color.BLUE);
                 pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
             }
+            isBestScore =false;
             resetGame();
             addDisksToPeg(n);
             moveQueue.clear();
@@ -143,6 +169,38 @@ public class HelloController {
             executeMoves();
             startTimer();
         } catch (NumberFormatException e) {
+            System.out.println("Invalid input! Please enter a number.");
+        }
+    }
+    private void addDisksToPegContinue(int numDisks,int numDisks1,int numDisks2) {
+        System.out.println(numDisks + " ***");
+        System.out.println(numDisks1+ " ***");
+        System.out.println(numDisks2 + " ***");
+        for (int i = numDisks; i > 0; i--) {
+            Disk disk = new Disk(i, Color.BLUE);
+            pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
+        }
+        for (int i = numDisks1; i > 0; i--) {
+            Disk disk = new Disk(i, Color.BLUE);
+            pegs[1].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
+        }
+        for (int i = numDisks2; i > 0; i--) {
+            Disk disk = new Disk(i, Color.BLUE);
+            pegs[2].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
+        }
+    }
+
+    public void ContinueSolution() {
+        try{
+            resetGame();
+            startTimer();
+            addDisksToPegContinue(Integer.parseInt(String.valueOf(n1c)),Integer.parseInt(String.valueOf(n2c)),Integer.parseInt(String.valueOf(n3c)));
+            System.out.println(Integer.parseInt(String.valueOf(n1c))+Integer.parseInt(String.valueOf(n2c)) + Integer.parseInt(String.valueOf(n3c))+ " ( ");
+            enableDragAndDrop();
+            System.out.println(String.valueOf(n1c) + String.valueOf(n2c) + String.valueOf(n3c) + " & ");
+            //MoveCount();
+        }
+        catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a number.");
         }
     }
@@ -170,16 +228,28 @@ public class HelloController {
 
     public void backToStart(ActionEvent actionEvent) {
         cont.openNewWindow("main.fxml","Hanoi",actionEvent);
+        main.isSolvedUser = false;
+        resetGame();
         NumberDisk = 3;
     }
 
     public void checkGameCompletion() {
-        int n = Integer.parseInt(inputId.getText());
-        if (pegs[2].equals(n)) {
+        int n = Integer.parseInt(String.valueOf(NumberDisk));
+        if (peg3.getChildren().size() == n) {
             disableDragAndDrop();
+            if(isBestScore) {
+                if (bestScore > counter) {
+                    bestScore = counter;
+                }
+            }
             stopTimer();
-            if(bestScore > counter){bestScore = counter;}
             counter = 0;
+            isReset.set(false);
+            System.out.println(bestScore);
+            cont.openNewWindow("main.fxml","Hanoi",null);
+            // بستن پنجره فعلی
+            Stage stage = (Stage) backToStart.getScene().getWindow();
+            stage.close();
         }
     }
 
@@ -195,12 +265,7 @@ public class HelloController {
         try{
             int n = Integer.parseInt(String.valueOf(NumberDisk));
             if ((n > 12) || (n < 1)) {
-                System.out.println("Please enter a valid number of disks.");
-                // ایجاد تایمر برای حذف متن بعد از چند ثانیه
-                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(2), event1 -> {
-                }));
-                timeline.setCycleCount(1); // فقط یک بار اجرا شود
-                timeline.play();
+                System.out.println("Please enter a valid number of disks.");;
 
                 return;
             }
@@ -209,15 +274,30 @@ public class HelloController {
                 Disk disk = new Disk(i, Color.BLUE);
                 pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
             }
+            isBestScore = true;
             resetGame();
             startTimer();
             addDisksToPeg(n);
             enableDragAndDrop();
+            //MoveCount();
         }
         catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a number.");
         }
     }
+    public static int moves1;
+
+    /*public static void MoveCount() {
+        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.75), e -> {
+            moves1++;
+            moveLbl.setText(String.valueOf("moves : " +moves1));
+            moveLbl.setStyle("    -fx-background-color: transparent;\n" +
+                    "    -fx-border-color: linear-gradient(to bottom right , #4c507b, #d3005f );\n" +
+                    "    -fx-background-radius: 5px;\n" +
+                    "    -fx-border-width: 2px;\n" +
+                    "    -fx-border-radius: 30px;");
+        }));
+    }*/
 
     private void setupDropTarget(VBox pegBox, Peg peg) {
         pegBox.setOnDragOver(event -> {
@@ -272,23 +352,10 @@ public class HelloController {
         return null;
     }
 
-
-
-    public void bestScore(ActionEvent actionEvent) {
-        int minutes = bestScore / 60;
-        int seconds = bestScore % 60;
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Best Score");
-        alert.setHeaderText(null);
-        alert.setContentText("Best Score is :" + String.format(" %s:%s",numberFormat.format(minutes), numberFormat.format(seconds)));
-        alert.showAndWait();
-    }
     private void enableDragAndDrop() {
         for (Peg peg : pegs) {
             for (Disk disk : peg.getDisks()) {
                 disk.setDraggable(true);
-                //peg.peekDisk().setDraggable(true);
             }
         }
     }

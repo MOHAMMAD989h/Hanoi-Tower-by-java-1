@@ -13,7 +13,7 @@
     <center>
         <AnchorPane prefHeight="710.0" prefWidth="1321.0" styleClass="background" stylesheets="@style1.css" BorderPane.alignment="CENTER">
             <children>
-                  <VBox fx:id="vboxFirst" layoutX="498.0" layoutY="277.0" prefHeight="266.0" prefWidth="296.0">
+                  <VBox fx:id="vboxFirst" layoutX="450.0" layoutY="277.0" prefHeight="266.0" prefWidth="296.0" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="389.0" AnchorPane.topAnchor="277.0">
                       <children>
                           <Button mnemonicParsing="false" onAction="#StartGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="New game " textFill="#180046ed">
                               <font>
@@ -39,6 +39,11 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#showBestScore" styleClass="btn1" stylesheets="@style1.css" text="Best Score">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
+                  </Button>
                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V 1.0 Edition" textAlignment="CENTER" wrappingWidth="251.6708984375">
                               <VBox.margin>
                                   <Insets bottom="100.0" top="10.0" />
@@ -46,12 +51,12 @@
                           </Text>
                       </children>
                   </VBox>
-                  <Text fill="#fff600" layoutX="397.0" layoutY="253.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HANOI TOWER GAME" wrappingWidth="498.49365234375">
+                  <Text fill="#fff600" layoutX="349.0" layoutY="254.0" strokeType="OUTSIDE" strokeWidth="0.0" text="HANOI TOWER GAME" wrappingWidth="498.49365234375" AnchorPane.bottomAnchor="523.451171875" AnchorPane.leftAnchor="349.0" AnchorPane.rightAnchor="287.50634765625" AnchorPane.topAnchor="200.044921875">
                       <font>
                           <Font size="50.0" />
                       </font>
                   </Text>
-            <VBox fx:id="vbox2" layoutX="498.0" layoutY="277.0" prefHeight="342.0" prefWidth="296.0" visible="false">
+            <VBox fx:id="vbox2" layoutX="450.0" layoutY="277.0" prefHeight="342.0" prefWidth="296.0" visible="false" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="389.0" AnchorPane.topAnchor="277.0">
                <children>
                   <Slider fx:id="numberSlider" prefHeight="41.0" prefWidth="296.0">
                      <VBox.margin>
@@ -67,7 +72,7 @@
                         <Insets left="15.0" />
                      </VBox.margin>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="47.0" prefWidth="95.0" styleClass="background" stylesheets="@style1.css">
+                  <Button mnemonicParsing="false" onAction="#backTo1" prefHeight="47.0" prefWidth="95.0" styleClass="background" stylesheets="@style1.css">
                      <VBox.margin>
                         <Insets left="100.0" top="20.0" />
                      </VBox.margin>
@@ -81,7 +86,7 @@
                   </Button>
                </children>
             </VBox>
-                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="546.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="498.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="606.0365447998047" AnchorPane.leftAnchor="498.0" AnchorPane.rightAnchor="437.0" AnchorPane.topAnchor="73.0">
                       <image>
                           <Image url="@../../../images/photo_2025-03-02_16-35-24s.png" />
                       </image>

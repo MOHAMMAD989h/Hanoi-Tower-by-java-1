@@ -5,12 +5,10 @@ import java.util.Queue;
 public class HanoiGame {
     private Peg[] pegs;
 
-
     public HanoiGame(Peg[] pegs) {
         this.pegs = pegs;
     }
 
-    HelloController cntr = new HelloController();
 
     public boolean moveDisk(int from, int to) {
         Peg source = pegs[from];

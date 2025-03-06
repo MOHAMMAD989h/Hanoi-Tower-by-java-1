@@ -40,6 +40,10 @@ public class Peg extends VBox {
                     sourcePeg.popDisk();
                     pushDisk(draggedDisk);
                     event.setDropCompleted(true);
+
+                    //HelloController.MoveCount();
+
+
                 } else {
                     event.setDropCompleted(false);
                 }

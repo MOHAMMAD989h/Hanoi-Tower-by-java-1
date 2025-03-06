@@ -6,11 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Slider;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class main {
 
@@ -30,6 +33,10 @@ public class main {
     public static int NumberDisk = 3;
 
     private Timeline timeline;
+
+    static boolean isSolvedUser = false;
+    boolean isOpenContinue = false;
+
     @FXML
     public void initialize() {
         numberSlider.setMin(3);
@@ -44,8 +51,7 @@ public class main {
         numberSlider.setShowTickMarks(true);
         numberSlider.setShowTickLabels(true);
         timeline = new Timeline(new KeyFrame(Duration.millis(50), event -> {
-            int newValue = (int) Math.round(numberSlider.getValue());
-            NumberDisk = newValue;
+            NumberDisk = (int) Math.round(numberSlider.getValue());
         }));
         timeline.setCycleCount(Timeline.INDEFINITE);
 
@@ -63,14 +69,11 @@ public class main {
     public void openNewWindow(String fxmlFile, String title, ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlFile));
-            Scene scene = new Scene(loader.load(),1535,790);
-
-
+            Scene scene = new Scene(loader.load(), 1535, 790);
             Stage stage = new Stage();
             stage.setScene(scene);
             stage.setTitle(title);
             stage.show();
-
 
             Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
             currentStage.close();
@@ -92,7 +95,23 @@ public class main {
     }
     @FXML
     void ContinueGame(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+            Scene scene = new Scene(loader.load(), 1535, 790);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.setTitle("Game");
+            stage.show();
 
+            // مقداردهی صحیح کنترلر
+            HelloController controller = loader.getController();
+            controller.ContinueSolution(); // اجرای حل خودکار
+
+            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            currentStage.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
     }
     @FXML
@@ -106,6 +125,8 @@ public class main {
     }
     @FXML
     void openSolveAuto(ActionEvent event) {
+        isOpenContinue = false;
+        isSolvedUser = false;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Scene scene = new Scene(loader.load(), 1535, 790);
@@ -127,6 +148,8 @@ public class main {
 
 
     public void OpenGame(ActionEvent actionEvent) {
+        isOpenContinue = true;
+        isSolvedUser = true;
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
             Scene scene = new Scene(loader.load(), 1535, 790);
@@ -147,6 +170,19 @@ public class main {
     }
 
     public void backToMain(MouseEvent mouseEvent) {
+        vbox2.setVisible(false);
+        vboxFirst.setVisible(true);
+    }
+    Alert alert = new Alert(Alert.AlertType.INFORMATION);
+
+    public void showBestScore(ActionEvent actionEvent) {
+        alert.setTitle("Best Score");
+        alert.setHeaderText(null);
+        alert.setContentText("best score : " + HelloController.bestScore);
+        alert.showAndWait();
+    }
+
+    public void backTo1(ActionEvent actionEvent) {
         vbox2.setVisible(false);
         vboxFirst.setVisible(true);
     }
