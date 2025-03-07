@@ -12,17 +12,18 @@ import javafx.scene.shape.Rectangle;
 public class Peg extends VBox {
     private VBox vbox;
     private Stack<Disk> disks;
+    private HelloController controller;
 
-    public Peg(VBox vbox) {
+    public Peg(VBox vbox,HelloController controller) {
         this.vbox = vbox;
         this.disks = new Stack<>();
         this.vbox.setAlignment(Pos.BOTTOM_CENTER);
+        this.controller = controller;
         setSpacing(5);
         setupDrop();
 
 
     }
-    HelloController hello = new HelloController();
 
     private void setupDrop() {
         setOnDragOver(event -> {
@@ -41,9 +42,6 @@ public class Peg extends VBox {
                     sourcePeg.popDisk();
                     pushDisk(draggedDisk);
                     event.setDropCompleted(true);
-
-                    hello.MoveCount();
-
 
                 } else {
                     event.setDropCompleted(false);

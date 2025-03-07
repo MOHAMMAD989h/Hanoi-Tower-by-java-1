@@ -7,6 +7,8 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.VBox;
@@ -15,11 +17,10 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import org.w3c.dom.ls.LSOutput;
 
 import java.text.NumberFormat;
-import java.util.LinkedList;
-import java.util.Locale;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -55,13 +56,17 @@ public class HelloController {
 
     private int moves = 0 ;
 
-
+    public static int bestMove = Integer.MAX_VALUE ;
+    @FXML
+    private ImageView imageStar;
 
     @FXML
     public void initialize() {
-        Peg pegA = new Peg(peg1);
-        Peg pegB = new Peg(peg2);
-        Peg pegC = new Peg(peg3);
+        System.out.println("^^^^");
+
+        Peg pegA = new Peg(peg1,this);
+        Peg pegB = new Peg(peg2,this);
+        Peg pegC = new Peg(peg3,this);
 
         pegs = new Peg[]{pegA, pegB, pegC};
         game = new HanoiGame(pegs);
@@ -137,11 +142,25 @@ public class HelloController {
         moveLbl.setText("");
         timeLbl.setStyle("");
         moveLbl.setStyle("");
+    }public static Color getRandomPredefinedColor() {
+        Color[] colors = {
+                Color.RED,
+                Color.BLUE,
+                Color.GREEN,
+                Color.YELLOW,
+                Color.ORANGE,
+                Color.PURPLE,
+                Color.CYAN,
+                Color.MAGENTA
+        };
+        Random random = new Random();
+        int randomIndex = random.nextInt(colors.length); // اندیس تصادفی بین 0 و length-1
+        return colors[randomIndex];
     }
 
     private void addDisksToPeg(int numDisks) {
         for (int i = numDisks; i > 0; i--) {
-            Disk disk = new Disk(i, Color.BLUE);
+            Disk disk = new Disk(i, getRandomPredefinedColor(),this);
             pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
         }
     }
@@ -158,7 +177,7 @@ public class HelloController {
                 return;
             }
             for (int i = n; i > 0; i--) {
-                Disk disk = new Disk(i, Color.BLUE);
+                Disk disk = new Disk(i, Color.BLUE,this);
                 pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
             }
             isBestScore =false;
@@ -177,15 +196,15 @@ public class HelloController {
         System.out.println(numDisks1+ " ***");
         System.out.println(numDisks2 + " ***");
         for (int i = numDisks; i > 0; i--) {
-            Disk disk = new Disk(i, Color.BLUE);
+            Disk disk = new Disk(i, Color.BLUE,this);
             pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
         }
         for (int i = numDisks1; i > 0; i--) {
-            Disk disk = new Disk(i, Color.BLUE);
+            Disk disk = new Disk(i, Color.BLUE,this);
             pegs[1].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
         }
         for (int i = numDisks2; i > 0; i--) {
-            Disk disk = new Disk(i, Color.BLUE);
+            Disk disk = new Disk(i, Color.BLUE,this);
             pegs[2].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
         }
     }
@@ -239,14 +258,23 @@ public class HelloController {
                 if (bestScore > counter) {
                     bestScore = counter;
                 }
+                if (bestMove > moves) {
+                    bestMove = moves;
+                }
             }
             stopTimer();
             counter = 0;
             isReset.set(false);
-            cont.openNewWindow("main.fxml","Hanoi",null);
-            //cont.getVbox2().setVisible(false);
-            //cont.getVbox3().setVisible(true);
-            //cont.getVboxFirst().setVisible(true);
+            if(n*5 > counter && n*4 > moves){
+                imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(5).jpg"))));
+            }
+            else if(n*7 > counter && n*6 > moves){
+                imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(7).jpg"))));
+            }
+            else {
+                imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(6).jpg"))));
+            }
+            cont.openNewWindow("starPage.fxml", "Win", null);
             // بستن پنجره فعلی
             Stage stage = (Stage) backToStart.getScene().getWindow();
             stage.close();
@@ -270,7 +298,7 @@ public class HelloController {
                 return;
             }
             for (int i = n; i > 0; i--) {
-                Disk disk = new Disk(i, Color.BLUE);
+                Disk disk = new Disk(i, Color.BLUE,this);
                 pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
             }
             resetGame();
@@ -278,7 +306,8 @@ public class HelloController {
             startTimer();
             addDisksToPeg(n);
             enableDragAndDrop();
-            //MoveCount();
+            System.out.println("Solved User");
+            MoveCount();
         }
         catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a number.");
@@ -286,9 +315,8 @@ public class HelloController {
     }
 
     public void MoveCount() {
-        moves++;
-        System.out.println(moves);
         moveLbl.setText(String.valueOf("moves : " +moves));
+        moves++;
         moveLbl.setStyle("    -fx-background-color: transparent;\n" +
                     "    -fx-border-color: linear-gradient(to bottom right , #4c507b, #d3005f );\n" +
                     "    -fx-background-radius: 5px;\n" +
@@ -330,7 +358,7 @@ public class HelloController {
                 peg.pushDisk(draggedDisk);
                 pegBox.getChildren().add(0, draggedDisk); // قرار گرفتن در بالاترین سطح ستون جدید
 
-                MoveCount();
+                System.out.println("setup drop target %%%% ");
 
                 event.setDropCompleted(true);
             }
@@ -356,4 +384,7 @@ public class HelloController {
         }
     }
 
+    public void gameExit(ActionEvent actionEvent) {
+        cont.openNewWindow("main.fxml", "Hanoi", actionEvent);
+    }
 }

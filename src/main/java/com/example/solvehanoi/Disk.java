@@ -18,9 +18,9 @@ public class Disk extends StackPane {
     private Rectangle rectangle;
     private Label label;
     private boolean isDraggable = false;
+    private HelloController controller;
 
-
-    public Disk(int size, Color color) {
+    public Disk(int size, Color color,HelloController controller) {
         this.size = size;
 
         double width = 20 + (size * 20);
@@ -33,6 +33,7 @@ public class Disk extends StackPane {
         label = new Label(String.valueOf(size));
         label.setTextFill(Color.WHITE);
         label.setStyle("-fx-font-weight: bold;");
+        this.controller = controller;
 
         getChildren().addAll(rectangle, label);
         setupDrag();
@@ -59,6 +60,7 @@ public class Disk extends StackPane {
                 db.setDragView(snapshotImage, getWidth() / 2, getHeight() / 2);
 
                 setOpacity(0.5); // تغییر شفافیت هنگام کشیدن
+
             }
             event.consume();
         });
@@ -66,6 +68,7 @@ public class Disk extends StackPane {
         setOnDragDone(event -> {
             setOpacity(1.0); // بازگرداندن شفافیت دیسک بعد از درگ
             event.consume();
+            controller.MoveCount();
         });
 
     }

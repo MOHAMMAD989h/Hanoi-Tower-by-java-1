@@ -181,7 +181,7 @@ public class main {
     public void showBestScore(ActionEvent actionEvent) {
         alert.setTitle("Best Score");
         alert.setHeaderText(null);
-        alert.setContentText("best score : " + HelloController.bestScore);
+        alert.setContentText("best time : " + HelloController.bestScore + " \n"+ "best moves : " + HelloController.bestMove );
         alert.showAndWait();
     }
 
@@ -190,11 +190,6 @@ public class main {
         vboxFirst.setVisible(true);
     }
 
-    public void gameExit(ActionEvent actionEvent) {
-        vbox3.setVisible(false);
-        vboxFirst.setVisible(true);
-        vbox2.setVisible(false);
-    }
     public VBox getVboxFirst() {
         return vboxFirst;
     }
