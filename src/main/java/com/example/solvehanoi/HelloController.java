@@ -266,13 +266,13 @@ public class HelloController {
             counter = 0;
             isReset.set(false);
             if(n*5 > counter && n*4 > moves){
-                imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(5).jpg"))));
+                //imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(5).jpg"))));
             }
             else if(n*7 > counter && n*6 > moves){
-                imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(7).jpg"))));
+                //imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(7).jpg"))));
             }
             else {
-                imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(6).jpg"))));
+                //imageStar.setImage(new Image(String.valueOf(getClass().getResource("/images/download(6).jpg"))));
             }
             cont.openNewWindow("starPage.fxml", "Win", null);
             // بستن پنجره فعلی
