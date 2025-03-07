@@ -22,6 +22,7 @@ public class Peg extends VBox {
 
 
     }
+    HelloController hello = new HelloController();
 
     private void setupDrop() {
         setOnDragOver(event -> {
@@ -41,7 +42,7 @@ public class Peg extends VBox {
                     pushDisk(draggedDisk);
                     event.setDropCompleted(true);
 
-                    //HelloController.MoveCount();
+                    hello.MoveCount();
 
 
                 } else {

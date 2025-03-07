@@ -91,6 +91,20 @@
                           <Image url="@../../../images/photo_2025-03-02_16-35-24s.png" />
                       </image>
                   </ImageView>
+            <VBox fx:id="vbox3" layoutX="450.0" layoutY="277.0" prefHeight="300.0" prefWidth="300.0" visible="false">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="292.0" pickOnBounds="true" preserveRatio="true">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                     </VBox.margin>
+                  </ImageView>
+                  <Button mnemonicParsing="false" onAction="#gameExit" styleClass="btn1" stylesheets="@style1.css" text="Back to Home">
+                     <VBox.margin>
+                        <Insets left="100.0" top="30.0" />
+                     </VBox.margin>
+                  </Button>
+               </children>
+            </VBox>
             </children>
         </AnchorPane>
     </center>

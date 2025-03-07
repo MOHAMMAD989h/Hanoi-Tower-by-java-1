@@ -26,8 +26,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static com.example.solvehanoi.main.NumberDisk;
 
 public class HelloController {
-    @FXML
-    private TextField inputId;
     @FXML private VBox peg1, peg2, peg3;
     @FXML private Peg[] pegs;
     @FXML private HanoiGame game;
@@ -54,6 +52,8 @@ public class HelloController {
     AtomicInteger n3c = new AtomicInteger() ;
 
     boolean isBestScore = false;
+
+    private int moves = 0 ;
 
 
 
@@ -204,8 +204,6 @@ public class HelloController {
             System.out.println("Invalid input! Please enter a number.");
         }
     }
-    public int moves = 0;
-
 
     private void executeMoves() {
         timeline = new Timeline(new KeyFrame(Duration.seconds(0.75), e -> {
@@ -245,8 +243,10 @@ public class HelloController {
             stopTimer();
             counter = 0;
             isReset.set(false);
-            System.out.println(bestScore);
             cont.openNewWindow("main.fxml","Hanoi",null);
+            //cont.getVbox2().setVisible(false);
+            //cont.getVbox3().setVisible(true);
+            //cont.getVboxFirst().setVisible(true);
             // بستن پنجره فعلی
             Stage stage = (Stage) backToStart.getScene().getWindow();
             stage.close();
@@ -269,13 +269,12 @@ public class HelloController {
 
                 return;
             }
-            resetGame();
             for (int i = n; i > 0; i--) {
                 Disk disk = new Disk(i, Color.BLUE);
                 pegs[0].pushDisk(disk);  // اضافه کردن دیسک‌ها به اولین ستون
             }
-            isBestScore = true;
             resetGame();
+            isBestScore = true;
             startTimer();
             addDisksToPeg(n);
             enableDragAndDrop();
@@ -285,19 +284,17 @@ public class HelloController {
             System.out.println("Invalid input! Please enter a number.");
         }
     }
-    public static int moves1;
 
-    /*public static void MoveCount() {
-        Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0.75), e -> {
-            moves1++;
-            moveLbl.setText(String.valueOf("moves : " +moves1));
-            moveLbl.setStyle("    -fx-background-color: transparent;\n" +
+    public void MoveCount() {
+        moves++;
+        System.out.println(moves);
+        moveLbl.setText(String.valueOf("moves : " +moves));
+        moveLbl.setStyle("    -fx-background-color: transparent;\n" +
                     "    -fx-border-color: linear-gradient(to bottom right , #4c507b, #d3005f );\n" +
                     "    -fx-background-radius: 5px;\n" +
                     "    -fx-border-width: 2px;\n" +
                     "    -fx-border-radius: 30px;");
-        }));
-    }*/
+    }
 
     private void setupDropTarget(VBox pegBox, Peg peg) {
         pegBox.setOnDragOver(event -> {
@@ -333,8 +330,7 @@ public class HelloController {
                 peg.pushDisk(draggedDisk);
                 pegBox.getChildren().add(0, draggedDisk); // قرار گرفتن در بالاترین سطح ستون جدید
 
-                moves++;
-                moveLbl.setText(String.valueOf("moves : " +moves));
+                MoveCount();
 
                 event.setDropCompleted(true);
             }

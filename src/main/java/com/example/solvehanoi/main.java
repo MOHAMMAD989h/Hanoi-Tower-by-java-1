@@ -28,6 +28,9 @@ public class main {
     private VBox vbox2;
 
     @FXML
+    private VBox vbox3;
+
+    @FXML
     public Slider numberSlider;
 
     public static int NumberDisk = 3;
@@ -185,5 +188,20 @@ public class main {
     public void backTo1(ActionEvent actionEvent) {
         vbox2.setVisible(false);
         vboxFirst.setVisible(true);
+    }
+
+    public void gameExit(ActionEvent actionEvent) {
+        vbox3.setVisible(false);
+        vboxFirst.setVisible(true);
+        vbox2.setVisible(false);
+    }
+    public VBox getVboxFirst() {
+        return vboxFirst;
+    }
+    public VBox getVbox2() {
+        return vbox2;
+    }
+    public VBox getVbox3() {
+        return vbox3;
     }
 }
