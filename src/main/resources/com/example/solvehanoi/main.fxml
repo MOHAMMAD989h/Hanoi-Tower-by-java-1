@@ -23,7 +23,7 @@
                                   <Insets bottom="10.0" top="10.0" />
                               </VBox.margin>
                           </Button>
-                  <Button fx:id="resumegame" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#ContinueGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Resume  Game" textFill="#180046ed">
+                  <Button fx:id="resumegame" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#ContinueGame" prefHeight="54.0" prefWidth="264.0" text="Resume  Game" textFill="#ffffffed">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -31,13 +31,18 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button fx:id="bestscore" mnemonicParsing="false" onAction="#showBestScore" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Best Score">
+                  <Button fx:id="bestscore" mnemonicParsing="false" onAction="#showBestScore" prefHeight="54.0" prefWidth="264.0" text="Best Score">
                      <VBox.margin>
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                      <font>
                         <Font size="25.0" />
                      </font>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#help" styleClass="btn1" stylesheets="@style1.css" text="?">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="20.0" top="10.0" />
+                     </VBox.margin>
                   </Button>
                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V 1.0 Edition" textAlignment="CENTER" wrappingWidth="251.6708984375">
                               <VBox.margin>

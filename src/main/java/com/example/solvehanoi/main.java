@@ -58,6 +58,30 @@ public class main {
 
     @FXML
     public void initialize() {
+        if(HelloController.isOpeneduser){
+            resumegame.setStyle("    -fx-background-color: linear-gradient(to bottom right ,#bf2f2f ,yellow );\n" +
+                    "    -fx-background-radius: 5px;\n" +
+                    "    -fx-cursor: hand;\n" +
+                    "    -fx-text-fill: #fff;");
+        }
+        else{
+            resumegame.setStyle("    -fx-background-color: linear-gradient(to bottom right ,#bf2f2f ,#4209b5 );\n" +
+                    "    -fx-background-radius: 5px;\n" +
+                    "    -fx-cursor: hand;\n" +
+                    "    -fx-text-fill: #fff;");
+        }
+        if(HelloController.isAtLeastCheckGameComp){
+            bestscore.setStyle("    -fx-background-color: linear-gradient(to bottom right ,#bf2f2f ,yellow );\n" +
+                    "    -fx-background-radius: 5px;\n" +
+                    "    -fx-cursor: hand;\n" +
+                    "    -fx-text-fill: #fff;");
+        }
+        else{
+            bestscore.setStyle("    -fx-background-color: linear-gradient(to bottom right ,#bf2f2f ,#4209b5 );\n" +
+                    "    -fx-background-radius: 5px;\n" +
+                    "    -fx-cursor: hand;\n" +
+                    "    -fx-text-fill: #fff;");
+        }
 
         numberSlider.setMin(3);
         numberSlider.setMax(16);
@@ -244,5 +268,12 @@ public class main {
         vbox2.setVisible(false);
         vbox3.setVisible(false);
         vboxFirst.setVisible(true);
+    }
+
+    public void help(ActionEvent actionEvent) {
+        alert.setTitle("HELP");
+        alert.setHeaderText(null);
+        alert.setContentText("if you see any errors, please email us : |asadpour808@gmail.com|");
+        alert.showAndWait();
     }
 }
