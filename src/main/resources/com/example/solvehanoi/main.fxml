@@ -15,7 +15,7 @@
             <children>
                   <VBox fx:id="vboxFirst" layoutX="450.0" layoutY="277.0" prefHeight="266.0" prefWidth="296.0" AnchorPane.bottomAnchor="161.0" AnchorPane.leftAnchor="450.0" AnchorPane.rightAnchor="389.0" AnchorPane.topAnchor="277.0">
                       <children>
-                          <Button mnemonicParsing="false" onAction="#StartGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="New game " textFill="#180046ed">
+                          <Button mnemonicParsing="false" onAction="#StartGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="New game " textFill="#d03333ed">
                               <font>
                                   <Font size="25.0" />
                               </font>
@@ -23,7 +23,7 @@
                                   <Insets bottom="10.0" top="10.0" />
                               </VBox.margin>
                           </Button>
-                  <Button layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#ContinueGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Continue The  Game" textFill="#180046ed">
+                  <Button fx:id="resumegame" layoutX="10.0" layoutY="20.0" mnemonicParsing="false" onAction="#ContinueGame" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Resume  Game" textFill="#180046ed">
                      <font>
                         <Font size="25.0" />
                      </font>
@@ -31,18 +31,13 @@
                         <Insets bottom="10.0" top="10.0" />
                      </VBox.margin>
                   </Button>
-                  <Button layoutX="10.0" layoutY="84.0" mnemonicParsing="false" onAction="#Profile" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Profile" textFill="#180046ed">
+                  <Button fx:id="bestscore" mnemonicParsing="false" onAction="#showBestScore" prefHeight="54.0" prefWidth="264.0" styleClass="btn1" stylesheets="@style1.css" text="Best Score">
+                     <VBox.margin>
+                        <Insets bottom="10.0" top="10.0" />
+                     </VBox.margin>
                      <font>
                         <Font size="25.0" />
                      </font>
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
-                  </Button>
-                  <Button mnemonicParsing="false" onAction="#showBestScore" styleClass="btn1" stylesheets="@style1.css" text="Best Score">
-                     <VBox.margin>
-                        <Insets bottom="10.0" top="10.0" />
-                     </VBox.margin>
                   </Button>
                           <Text strokeType="OUTSIDE" strokeWidth="0.0" text="V 1.0 Edition" textAlignment="CENTER" wrappingWidth="251.6708984375">
                               <VBox.margin>
@@ -91,6 +86,18 @@
                           <Image url="@../../../images/photo_2025-03-02_16-35-24s.png" />
                       </image>
                   </ImageView>
+            <VBox fx:id="vbox3" layoutX="450.0" layoutY="277.0" prefHeight="300.0" prefWidth="300.0" visible="false">
+               <children>
+                  <ImageView fx:id="starImage" fitHeight="150.0" fitWidth="287.0" pickOnBounds="true">
+                     <VBox.margin>
+                        <Insets bottom="20.0" left="10.0" right="10.0" top="20.0" />
+                     </VBox.margin></ImageView>
+                  <Button mnemonicParsing="false" onAction="#backTomain1" prefHeight="40.0" prefWidth="120.0" styleClass="btn1" stylesheets="@style1.css" text="back to main">
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="90.0" top="10.0" />
+                     </VBox.margin></Button>
+               </children>
+            </VBox>
             </children>
         </AnchorPane>
     </center>

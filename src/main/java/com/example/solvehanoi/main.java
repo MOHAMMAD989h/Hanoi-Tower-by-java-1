@@ -7,7 +7,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -40,8 +43,22 @@ public class main {
     static boolean isSolvedUser = false;
     boolean isOpenContinue = false;
 
+    public static boolean isStarPage = false;
+    public static boolean isStar2 = false;
+    public static boolean isStar3 = false;
+
+
+    @FXML
+    public  ImageView starImage;
+
+    @FXML
+    private Button bestscore;
+    @FXML
+    private Button resumegame;
+
     @FXML
     public void initialize() {
+
         numberSlider.setMin(3);
         numberSlider.setMax(16);
         numberSlider.setValue(3);
@@ -68,6 +85,23 @@ public class main {
                     NumberDisk = newValue.intValue();
                 }
         );
+        System.out.println(isStarPage);
+        if(isStarPage){
+            vbox3.setVisible(true);
+            vboxFirst.setVisible(false);
+            if(isStar3) {
+                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download(5).jpg"))));
+            }
+            else if (isStar2) {
+                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download(7).jpg"))));
+            }
+            else{
+                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download(6).jpg"))));
+            }
+        }
+        isStarPage = false;
+        isStar2 = false;
+        isStar3 = false;
     }
     public void openNewWindow(String fxmlFile, String title, ActionEvent event) {
         try {
@@ -98,32 +132,30 @@ public class main {
     }
     @FXML
     void ContinueGame(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
-            Scene scene = new Scene(loader.load(), 1535, 790);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.setTitle("Game");
-            stage.show();
+        if(HelloController.isOpeneduser) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("hello-view.fxml"));
+                Scene scene = new Scene(loader.load(), 1535, 790);
+                Stage stage = new Stage();
+                stage.setScene(scene);
+                stage.setTitle("Game");
+                stage.show();
 
-            // مقداردهی صحیح کنترلر
-            HelloController controller = loader.getController();
-            controller.ContinueSolution(); // اجرای حل خودکار
+                // مقداردهی صحیح کنترلر
+                HelloController controller = loader.getController();
+                controller.ContinueSolution(); // اجرای حل خودکار
 
-            Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-            currentStage.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+                Stage currentStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                currentStage.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
-    }
-    @FXML
-    void Profile(ActionEvent event) {
-        if(isLoggedIn) {
-            openNewWindow("profile1.fxml", "Profile", event);
-        }
-        else {
-            openNewWindow("loginpage.fxml", "Login", event);
+        else{
+            alert.setTitle("ERROR");
+            alert.setHeaderText(null);
+            alert.setContentText("please at least open one game");
+            alert.showAndWait();
         }
     }
     @FXML
@@ -179,10 +211,18 @@ public class main {
     Alert alert = new Alert(Alert.AlertType.INFORMATION);
 
     public void showBestScore(ActionEvent actionEvent) {
-        alert.setTitle("Best Score");
-        alert.setHeaderText(null);
-        alert.setContentText("best time : " + HelloController.bestScore + " \n"+ "best moves : " + HelloController.bestMove );
-        alert.showAndWait();
+        if(HelloController.isAtLeastCheckGameComp) {
+            alert.setTitle("Best Score");
+            alert.setHeaderText(null);
+            alert.setContentText("best time : " + HelloController.bestScore + " \n" + "best moves : " + HelloController.bestMove);
+            alert.showAndWait();
+        }
+        else{
+            alert.setTitle("ERROR");
+            alert.setHeaderText(null);
+            alert.setContentText("please  at least complete one game");
+            alert.showAndWait();
+        }
     }
 
     public void backTo1(ActionEvent actionEvent) {
@@ -198,5 +238,11 @@ public class main {
     }
     public VBox getVbox3() {
         return vbox3;
+    }
+
+    public void backTomain1(ActionEvent actionEvent) {
+        vbox2.setVisible(false);
+        vbox3.setVisible(false);
+        vboxFirst.setVisible(true);
     }
 }

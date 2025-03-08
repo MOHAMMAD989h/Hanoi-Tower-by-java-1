@@ -47,6 +47,7 @@ public class Disk extends StackPane {
     private void setupDrag() {
         setOnDragDetected(event -> {
             if (isDraggable && isTopDisk()) {
+                controller.MoveCount();
                 Dragboard db = startDragAndDrop(TransferMode.MOVE);
                 ClipboardContent content = new ClipboardContent();
                 content.putString(String.valueOf(size));
@@ -68,7 +69,6 @@ public class Disk extends StackPane {
         setOnDragDone(event -> {
             setOpacity(1.0); // بازگرداندن شفافیت دیسک بعد از درگ
             event.consume();
-            controller.MoveCount();
         });
 
     }
