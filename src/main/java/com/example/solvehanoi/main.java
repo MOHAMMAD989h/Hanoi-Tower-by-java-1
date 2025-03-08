@@ -114,13 +114,13 @@ public class main {
             vbox3.setVisible(true);
             vboxFirst.setVisible(false);
             if(isStar3) {
-                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download(5).jpg"))));
+                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download__5_-removebg-preview.png"))));
             }
             else if (isStar2) {
-                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download(7).jpg"))));
+                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download__7_-removebg-preview.png"))));
             }
             else{
-                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download(6).jpg"))));
+                starImage.setImage(new Image(String.valueOf(getClass().getResource("/images/download__6_-removebg-preview.png"))));
             }
         }
         isStarPage = false;
