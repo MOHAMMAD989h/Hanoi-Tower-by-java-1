@@ -44,7 +44,7 @@ public class HelloController {
 
     private static int counter;
 
-    private final NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH); // نمایش اعداد به انگلیسی
+    private final NumberFormat numberFormat = NumberFormat.getInstance(Locale.ENGLISH);
 
     AtomicBoolean isReset = new AtomicBoolean(true);
 
@@ -194,6 +194,7 @@ public class HelloController {
             executeMoves();
             counter = 0;
             startTimer();
+
         } catch (NumberFormatException e) {
             System.out.println("Invalid input! Please enter a number.");
         }

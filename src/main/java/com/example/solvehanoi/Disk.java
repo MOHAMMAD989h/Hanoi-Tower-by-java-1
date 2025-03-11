@@ -60,7 +60,7 @@ public class Disk extends StackPane {
                 snapshot(snapshotParams, snapshotImage); // گرفتن تصویر از دیسک
                 db.setDragView(snapshotImage, getWidth() / 2, getHeight() / 2);
 
-                setOpacity(0.5); // تغییر شفافیت هنگام کشیدن
+                setOpacity(0.5);
 
             }
             event.consume();
@@ -75,7 +75,7 @@ public class Disk extends StackPane {
     private boolean isTopDisk() {
         if (getParent() instanceof VBox) {
             VBox parentPeg = (VBox) getParent();
-            return parentPeg.getChildren().get(0) == this;  // بررسی اینکه آیا این دیسک در بالای لیست قرار دارد؟
+            return parentPeg.getChildren().get(0) == this;
         }
         return false;
     }
